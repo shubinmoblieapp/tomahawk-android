@@ -18,35 +18,34 @@
  */
 package org.tomahawk.tomahawk_android;
 
-import org.acra.ACRA;
-import org.acra.ReportingInteractionMode;
-import org.acra.annotation.ReportsCrashes;
-import org.acra.sender.HttpSender;
-import org.tomahawk.tomahawk_android.services.PlaybackService;
-import org.tomahawk.tomahawk_android.utils.TomahawkHttpSender;
-
 import android.app.Application;
 import android.content.Context;
 import android.os.StrictMode;
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
+
+import org.tomahawk.tomahawk_android.services.PlaybackService;
+
+import io.fabric.sdk.android.Fabric;
+
 /**
  * This class represents the Application core.
  */
-@ReportsCrashes(
-        httpMethod = HttpSender.Method.PUT,
-        reportType = HttpSender.Type.JSON,
-        formUri = "http://crash-stats.tomahawk-player.org:5984/acra-tomahawkandroid/_design/acra-storage/_update/report",
-        formUriBasicAuthLogin = "reporter",
-        formUriBasicAuthPassword = "unknackbar",
-        excludeMatchingSharedPreferencesKeys = {".*_config$"},
-        mode = ReportingInteractionMode.DIALOG,
-        logcatArguments = {"-t", "2000", "-v", "time"},
-        resDialogText = R.string.crash_dialog_text,
-        resDialogIcon = android.R.drawable.ic_dialog_info,
-        resDialogTitle = R.string.crash_dialog_title,
-        resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
-        resDialogOkToast = R.string.crash_dialog_ok_toast)
+//@ReportsCrashes(
+//        httpMethod = HttpSender.Method.PUT,
+//        reportType = HttpSender.Type.JSON,
+//        formUri = "http://crash-stats.tomahawk-player.org:5984/acra-tomahawkandroid/_design/acra-storage/_update/report",
+//        formUriBasicAuthLogin = "reporter",
+//        formUriBasicAuthPassword = "unknackbar",
+//        excludeMatchingSharedPreferencesKeys = {".*_config$"},
+//        mode = ReportingInteractionMode.DIALOG,
+//        logcatArguments = {"-t", "2000", "-v", "time"},
+//        resDialogText = R.string.crash_dialog_text,
+//        resDialogIcon = android.R.drawable.ic_dialog_info,
+//        resDialogTitle = R.string.crash_dialog_title,
+//        resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
+//        resDialogOkToast = R.string.crash_dialog_ok_toast)
 public class TomahawkApp extends Application {
 
     private static final String TAG = TomahawkApp.class.getSimpleName();
@@ -73,10 +72,10 @@ public class TomahawkApp extends Application {
 
     @Override
     public void onCreate() {
-        ACRA.init(this);
-        ACRA.getErrorReporter().setReportSender(
-                new TomahawkHttpSender(ACRA.getConfig().httpMethod(), ACRA.getConfig().reportType(),
-                        null));
+//        ACRA.init(this);
+//        ACRA.getErrorReporter().setReportSender(
+//                new TomahawkHttpSender(ACRA.getConfig().httpMethod(), ACRA.getConfig().reportType(),
+//                        null));
 
         StrictMode.setThreadPolicy(
                 new StrictMode.ThreadPolicy.Builder().detectCustomSlowCalls().detectDiskReads()
@@ -91,6 +90,7 @@ public class TomahawkApp extends Application {
         }
 
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
 
         sApplicationContext = getApplicationContext();
     }

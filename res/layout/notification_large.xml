@@ -75,14 +75,15 @@
                   android:layout_width="match_parent"
                   android:layout_height="48dp"
                   android:orientation="horizontal"
-                  android:layout_toRightOf="@id/notification_large_imageview_albumart"
-                  android:layout_alignParentBottom="true">
+                  android:layout_below="@id/notification_large_textview3"
+                  android:layout_toRightOf="@id/notification_large_imageview_albumart">
 
         <ImageView android:id="@+id/notification_large_imageview_favorite"
                    android:layout_height="match_parent"
                    android:layout_width="match_parent"
                    android:layout_weight="1"
                    android:padding="@dimen/padding_medium"
+                   android:visibility="gone"
                    android:src="@drawable/ic_action_favorites"
                    android:background="@drawable/selectable_background_tomahawk"/>
 

@@ -17,19 +17,13 @@
  */
 package org.tomahawk.tomahawk_android.utils;
 
-import com.squareup.picasso.Transformation;
-
-import org.tomahawk.tomahawk_android.TomahawkApp;
-
 import android.graphics.Bitmap;
-import android.support.v8.renderscript.Allocation;
-import android.support.v8.renderscript.Element;
-import android.support.v8.renderscript.RenderScript;
-import android.support.v8.renderscript.ScriptIntrinsicBlur;
+
+import com.squareup.picasso.Transformation;
 
 public class BlurTransformation implements Transformation {
 
-    private static final RenderScript mRenderScript = RenderScript.create(TomahawkApp.getContext());
+//    private static final RenderScript mRenderScript = RenderScript.create(TomahawkApp.getContext());
 
     @Override
     public Bitmap transform(Bitmap source) {
@@ -42,16 +36,16 @@ public class BlurTransformation implements Transformation {
     }
 
     public static Bitmap staticTransform(Bitmap source, float radius) {
-        final Allocation input = Allocation.createFromBitmap(mRenderScript, source);
-        // Use this constructor for best performance, because it uses USAGE_SHARED mode which reuses
-        // memory
-        final Allocation output = Allocation.createTyped(mRenderScript, input.getType());
-        final ScriptIntrinsicBlur script =
-                ScriptIntrinsicBlur.create(mRenderScript, Element.U8_4(mRenderScript));
-        script.setRadius(radius);
-        script.setInput(input);
-        script.forEach(output);
-        output.copyTo(source);
+//        final Allocation input = Allocation.createFromBitmap(mRenderScript, source);
+//         Use this constructor for best performance, because it uses USAGE_SHARED mode which reuses
+//         memory
+//        final Allocation output = Allocation.createTyped(mRenderScript, input.getType());
+//        final ScriptIntrinsicBlur script =
+//                ScriptIntrinsicBlur.create(mRenderScript, Element.U8_4(mRenderScript));
+//        script.setRadius(radius);
+//        script.setInput(input);
+//        script.forEach(output);
+//        output.copyTo(source);
         return source;
     }
 }

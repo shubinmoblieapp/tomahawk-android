@@ -17,6 +17,11 @@
  */
 package org.tomahawk.libtomahawk.resolver;
 
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.preference.PreferenceManager;
+import android.util.Log;
+
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -40,11 +45,6 @@ import org.apache.lucene.util.Version;
 import org.tomahawk.libtomahawk.database.CollectionDb;
 import org.tomahawk.libtomahawk.database.CollectionDbManager;
 import org.tomahawk.tomahawk_android.TomahawkApp;
-
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.preference.PreferenceManager;
-import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -128,7 +128,7 @@ public class FuzzyIndex {
                 preferences.edit().putLong(mLastUpdateStorageKey, System.currentTimeMillis())
                         .commit();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             Log.e(TAG, "create - " + e.getClass() + ": " + e.getLocalizedMessage());
             close();
             return false;
