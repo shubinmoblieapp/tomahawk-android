@@ -23,11 +23,7 @@ import android.content.Context;
 import android.os.StrictMode;
 import android.util.Log;
 
-import com.crashlytics.android.Crashlytics;
-
 import org.tomahawk.tomahawk_android.services.PlaybackService;
-
-import io.fabric.sdk.android.Fabric;
 
 /**
  * This class represents the Application core.
@@ -90,7 +86,7 @@ public class TomahawkApp extends Application {
         }
 
         super.onCreate();
-        Fabric.with(this, new Crashlytics());
+//        Fabric.with(this, new Crashlytics());
 
         sApplicationContext = getApplicationContext();
     }
